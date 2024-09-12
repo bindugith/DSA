@@ -1,0 +1,163 @@
+import java.util.*;
+class Node{
+int data;
+Node next;
+Node(int x){
+data=x;
+next=null;
+}
+}
+class singleList{
+Node head,tail;
+singleList(){
+head=null;
+tail=null;
+}
+void create(int x){
+Node n=new Node(x);
+if(head==null){
+head=n;
+tail=n;
+}else{
+    tail.next=n;
+    tail=n;
+}
+}
+void display(){
+    Node temp=head;
+    while(temp!=null){
+        System.out.println(temp.data);
+        temp=temp.next;
+    }
+}
+void insertFirst(int x){
+    Node n=new Node(x);
+    if(head==null){
+        head=n;
+        tail=n;
+    }else{
+        n.next=head;
+        head=n;
+    }
+}
+void insertAnyPosition(int pos,int val){
+    Node n=new Node(val);
+    if(head==null){
+        head=n;
+        tail=n;
+    }else{
+    Node temp=head;
+    int count=2;
+    while(count<pos && temp.next!=null){
+        count++;
+        temp=temp.next;
+    }
+    if(temp.next==null){
+        temp.next=n;
+        tail=n;
+    }else{
+        n.next=temp.next;
+        temp.next=n;
+    }
+}
+}
+void deleteAtFirst(){
+    if(head==null){
+        System.out.println("List is empty");
+    }else{
+        System.out.println(head.data);
+        head=head.next;
+    }
+
+}
+void deleteAtLast(){
+    Node temp=head;
+    if(head==null){
+        System.out.println("List is empty");
+    }
+    if(temp.next==null){
+        System.out.println(temp.data);
+        head=null;
+        tail=null;
+    }else{
+        while(temp.next.next!=null){
+            temp=temp.next;
+        }
+        System.out.println(temp.next.data);
+        temp.next=null;
+        tail=temp;
+    }
+}
+void deleteAnyPosition(int pos){
+    Node temp=head;
+    int count=2;
+    if(head==null){
+        System.out.println("List is empty");
+    }
+    if(head.next==null){
+        System.out.println(head.data);
+        head=null;
+        tail=null;
+    }else{
+        while(count<pos && temp.next.next!=null){
+            temp=temp.next;
+            count++;
+        }
+        if(temp.next.next==null){
+            System.out.println(temp.next.data);
+            temp.next=null;
+            tail=temp;
+        }else{
+            System.out.println(temp.next.data);
+            Node temp1=temp.next;
+            temp.next=temp.next.next;
+            temp1.next=null;
+        }
+    }
+}
+}
+class SingleLinkedList2{
+    public static void main(String[] args){
+        Scanner s=new Scanner(System.in);
+        singleList obj=new singleList();
+        for(;;){
+            System.out.println("1.create \n 2.display() \n 3.insertFirst \n 4.insertanyposition \n 5.deleteAtFirst \n 6.deleteAtLast \n 7.deleteAnyPosition");
+            System.out.println("enter any choice");
+            int ch=s.nextInt();
+            if(ch==1){
+                int a;
+                System.out.println("enter a value");
+                a=s.nextInt();
+               obj.create(a);
+            }
+            if(ch==2){
+                obj.display();
+            }
+            if(ch==3){
+                int b;
+                System.out.println("enter a value");
+                b=s.nextInt();
+                obj.insertFirst(b);
+            }
+            if(ch==4){
+                int val,pos;
+                System.out.println("enter a pos");
+                pos=s.nextInt();
+                System.out.println("Enter any val");
+                val=s.nextInt();
+                obj.insertAnyPosition(pos,val);
+            }
+            if(ch==5){
+                obj.deleteAtFirst();
+            }
+            if(ch==6){
+                obj.deleteAtLast();
+            }
+            if(ch==7){
+                System.out.println("enter any pos");
+                int pos=s.nextInt();
+                obj.deleteAnyPosition(pos);
+            }
+        }
+    }
+}
