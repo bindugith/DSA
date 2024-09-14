@@ -1,0 +1,192 @@
+import java.util.*;
+class Node{
+int data;
+Node next;
+Node prev;
+Node(int x){
+data=x;
+prev=null;
+next=null;
+}
+}
+class double{
+Node head,tail;
+double(){
+head=null;
+tail=null;
+}
+void create(int x){
+Node n=new Node(x);
+if(head==null){
+head=n;
+tail=n;
+}else{
+tail.next=n;
+n.prev=tail;
+tail=n;
+}
+}
+void forwardDis(){
+Node temp=head;
+if(head==null){
+System.out.println("List is empty");
+}else{
+while(temp!=null){
+System.out.println(temp.data+" ");
+temp=temp.next;
+}
+}
+}
+void backwardDis(){
+Node temp=tail;
+if(head==null){
+System.out.println("List is empty");
+}else{
+while(temp!=null)
+{
+System.out.println(temp.data+" ");
+temp=temp.prev;
+}
+}
+}
+void insertAtFirst(int val){
+Node n=new Node(val);
+if(head==null){
+head=n;
+tail=n;
+}else{
+head.prev=n;
+n.next=head;
+head=n;
+}
+}
+void insertAtAnyPosition(int pos,int val){
+Node n=new Node(val);
+if(head==null){
+head=n;
+tail=n;
+}else{
+Node temp=head;
+int count=1;
+while(count<pos && temp.next!=null){
+count++;
+temp=temp.next;
+}
+if(temp.next==null){
+temp.next=n;
+n.next=temp;
+tail=n;
+}else{
+n.next=temp;
+n.prev=temp.prev;
+temp.prev.next=n;
+temp.prev=n;
+}
+}
+}
+void deleteAtFirst(){
+if(head==null){
+System.out.println("List is empty");
+}
+if(head.next=null){
+head=null;
+tail=null;
+}else{
+Node temp=head;
+head=head.next;
+head.prev=null;
+temp=null;
+}
+}
+void deleteAtLast(){
+if(head==null){
+System.out.println("List is empty");
+}
+if(tail.prev==null){
+head=null;
+tail=null;
+}else{
+Node temp=tail;
+tail=tail.prev;
+tail.next=null;
+temp=null;
+}
+}
+void deleteAtAnyPosition(int pos,int val){
+if(head==null){
+System.out.println("List is empty");
+}
+int count=1;
+Node temp=head;
+while(count<pos && temp.next!=null){
+count++;
+temp=temp.next;
+}
+if(temp.next==null){
+temp.prev.next=null;
+tail=temp.prev;
+temp=null;
+}else{
+temp.prev.next=temp.next;
+temp.next.prev=temp.prev;
+temp=null;
+}
+}
+}
+class DoubleLinkedList1{
+public static void main(String[] args){
+Scanner s=new Scanner(System.in);
+double obj=new double();
+for(;;){
+System.out.println("1.create \n 2.display \n 3.insertAtFirst \n 4.insertAtAnyPosition \n 5.deleteAtFirst \n 6.deleteAtLast \n 7.deleteAtAnyPosition");
+int ch;
+System.out.println("Enter a choice");
+ch=s.nextInt();
+if(ch==1){
+System.out.println("Enter a element");
+int x=s.nextInt();
+obj.create(x);
+}
+if(ch==2){
+System.out.println("1.forwardDisplay \n 2.backwardDisplay");
+System.out.println("Enter a choice");
+int y=s.nextInt();
+if(y==1){
+obj.forwardDis();
+}
+else if(y==2){
+obj.backwardDis();
+}
+}
+if(ch==3){
+int x;
+System.out.println("Enter a elememt");
+x=s.nextInt();
+obj.insertAtFirst(x);
+}
+if(ch==4){
+int pos,val;
+System.out.println("Enter a pos");
+pos=s.nextInt();
+System.out.println("Enter a val");
+val=s.nextInt();
+obj.insertAtAnyPosition(pos,val);
+}
+if(ch==5){
+obj.deleteAtFirst();
+}
+if(ch==6){
+obj.deleteAtLast();
+}
+if(ch==7){
+int pos,val;
+System.out.println("Enter a pos");
+pos=s.nextInt();
+System.out.println("Enter a val");
+val=s.nextInt();
+obj.deleteAtAnyPosition(pos,val);
+}
+}
+}
+
+
