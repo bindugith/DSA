@@ -1,0 +1,201 @@
+import java.util.*;
+class Node{
+int data;
+Node next;
+Node prev;
+Node(int x){
+data=x;
+prev=null;
+next=null;
+}
+}
+class circularDouble{
+Node head;
+circularDouble(){
+head=null;
+}
+void create(int x){
+Node n=new Node(x);
+if(head==null){
+head=n;
+n.prev=head;
+n.next=head;
+}else{
+Node temp=head;
+while(temp.next!=head){
+temp=temp.next;
+}
+n.prev=temp;
+n.next=head;
+head.prev=n;
+temp.next=n;
+}
+}
+void forward(){
+if(head==null){
+System.out.println("List is empty");
+}else{
+Node temp=head;
+while(temp.next!=head){
+System.out.println(temp.data+" ");
+temp=temp.next;
+}
+System.out.println(temp.data+" ");
+}
+}
+void backward(){
+if(head==null){
+System.out.println("List is empty");
+}
+Node temp=head.prev;
+while(temp!=head){
+    System.out.println(temp.data);
+    temp=temp.prev;
+}
+System.out.println(temp.data);
+}
+void insertAtFirst(int x){
+    Node n=new Node(x);
+    if(head==null){
+        head=n;
+        n.prev=head;
+        n.next=head;
+    }else{
+        n.prev=head.prev;
+        n.next=head;
+        head.prev.next=n;
+        head.prev=n;
+        head=n;
+    }
+}
+void insertAtAnyPosition(int pos,int val){
+    if(head==null){
+        head=n;
+        n.prev=head;
+        n.next=head;
+    }else if(pos==1){
+        n.prev=head.prev;
+        n.next=head;
+        head.prev.next=n;
+        head.prev=n;
+        head=n;
+    }else{
+        int count=2;
+        Node temp=head;
+        while(count<pos && temp.next!=head){
+            count++;
+            temp=temp.next;
+        }
+        if(temp.next==head){
+            n.prev=temp;
+            n.next=head;
+            temp.next=n;
+            head.prev=n;
+        }else{
+            n.prev=temp;
+            n.next=temp.next;
+            temp.next=n;
+        }
+    }
+}
+void deleteAtFirst(){
+    if(head==null){
+        System.out.println("List is empty");
+    }
+    if(head.next==head){
+        head=null;
+    }else{
+        head.next.prev=head.prev;
+        head.prev.next=head.next;
+        head=head.next;
+    }
+}
+void deleteAtLast(){
+    if(head==null){
+        System.out.println("List is empty");
+    }
+    if(head.next==head){
+        head=null;
+    }else{
+        Node temp=head;
+        while(temp.next.next!=head){
+            temp=temp.next;
+        }
+        head.prev=temp;
+        temp.next=head;
+    }
+}
+void deleteAtAnyPosition(int pos){
+    if(head==null){
+        System.out.println("List is empty");
+    }
+    if(head.next==head){
+        head=null;
+    }else if(pos==1){
+        head.next.prev=head.prev;
+        head.prev.next=head.next;
+        head=head.next;
+    }else{
+        int count=2;
+        Node temp=head;
+        while(count<pos && temp.next!=head){
+            count++;
+            temp=temp.next;
+        }
+        temp.next.prev=temp.prev;
+        temp.prev.next=temp.next;
+    }
+}
+}
+class CircularDoubleLinkedList{
+    public static void main(String[] args){
+    Scanner s=new Scanner(System.in);
+    circularDouble obj=new circularDouble();
+    for(;;){
+    System.out.println("1.create\n 2.display \n 3.insertAtFirst \n 4.insertAtAnyPosition \n 5.deleteAtFirst \n 6.deleteAtLast \n 7.deleteAtAnyPosition");
+    System.out.println("Enter a choice");
+    int ch=s.nextInt();
+    if(ch==1){
+    System.out.println("Enter a val");
+    int val=s.nextInt();
+    obj.create(val);
+    }
+    else if(ch==2){
+    System.out.println("1.forward \n 2.backward");
+    System.out.println("Enter a choice");
+    int x=s.nextInt();
+    if(x==1){
+        obj.forward();
+    }else{
+        obj.backward();
+    }
+    }
+    else if(ch==3){
+    System.out.println("Enter a val");
+    int val=s.nextInt();
+    obj.insertAtFirst(val);
+    }
+    else if(ch==4){
+    System.out.println("Enter a pos");
+    int pos=s.nextInt();
+    System.out.println("Enter a val");
+    int val=s.nextInt();
+    obj.insertAtAnyPosition(pos,val);
+    }
+    else if(ch==5){
+    obj.deleteAtFirst();
+    }
+    else if(ch==6){
+    obj.deleteAtLast();
+    }
+    else if(ch==7){
+        System.out.println("Enter a position");
+        int x=s.nextInt();
+        obj.deleteAtAnyPosition(x);
+    }
+    }
+    }
+    }
+    
+    
+
