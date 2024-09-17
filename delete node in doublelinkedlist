@@ -1,0 +1,36 @@
+Delete node in Doubly Linked List
+Difficulty: EasyAccuracy: 42.98%Submissions: 137K+Points: 2
+Given a Doubly Linked list and a position. The task is to delete a node from a given position (position starts from 1) in a doubly linked list and return the head of the doubly Linked list.
+
+Examples:
+
+Input: LinkedList = 1 <--> 3 <--> 4, x = 3
+Output: 1 <--> 3
+Explanation: After deleting the node at position 3 (position starts from 1),the linked list will be now as 1 <--> 3.
+class Solution {
+    public Node deleteNode(Node head, int x) {
+        // code here
+        Node temp=head;
+        int count=1;
+        if(x==1){
+            head=head.next;
+            head.prev=null;
+            temp=null;
+            return head;
+        }
+        while(count<x && temp.next!=null){
+            count++;
+            temp=temp.next;
+        }
+        if(temp.next==null){
+            temp.prev.next=null;
+           Node tail=temp.prev;
+            temp=null;
+        }else{
+            temp.prev.next=temp.next;
+            temp.next.prev=temp.prev;
+            temp=null;
+        }
+        return head;
+    }
+}
