@@ -1,0 +1,25 @@
+Reverse a Doubly Linked List
+Difficulty: EasyAccuracy: 70.38%Submissions: 139K+Points: 2
+Given a doubly linked list. Your task is to reverse the doubly linked list and return its head.
+
+Examples:
+
+Input: LinkedList: 3 <-> 4 <-> 5
+Output: 5 <-> 4 <-> 3
+class Solution {
+    public DLLNode reverseDLL(DLLNode head) {
+        // Your code here
+        if(head==null || head.next==null){
+            return head;
+        }
+        DLLNode temp=head;
+        DLLNode front=null;
+        while(temp!=null){
+            front=temp.prev;
+            temp.prev=temp.next;
+            temp.next=front;
+            temp=temp.prev;
+        }
+        return front.prev;
+    }
+}
