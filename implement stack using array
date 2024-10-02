@@ -1,0 +1,54 @@
+import java.util.*;
+class stack1{
+int top;
+int size;
+int a[];
+stack1(int x){
+size=x;
+top=-1;
+a=new int[x];
+}
+void push(int x){
+top=top+1;
+a[top]=x;
+}
+void pop(){
+top=top-1;
+System.out.println(a[top]);
+}
+void top(){
+System.out.println(a[top]);
+}
+void size(){
+System.out.println(top+1);
+}
+}
+class stackToArray{
+public static void main(String[] args){
+Scanner s=new Scanner(System.in);
+int n=s.nextInt();
+stack1 obj=new stack1(n);
+for(;;){
+System.out.println("Enter your choice");
+System.out.println("1.push\n 2.pop \n 3. top \n 4.size");
+int ch=s.nextInt();
+if(ch==1){
+System.out.println("Enter a val");
+int x=s.nextInt();
+obj.push(x);
+}
+else if(ch==2){
+obj.pop();
+}
+else if(ch==3){
+obj.top();
+}
+else if(ch==4){
+obj.size();
+}
+else{
+System.out.println("Invalid choice");
+}
+}
+}
+}
