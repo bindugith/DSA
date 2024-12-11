@@ -1,0 +1,26 @@
+Given an array arr[] and an integer k where k is smaller than the size of the array, the task is to find the kth smallest element in the given array.
+
+Follow up: Don't solve it using the inbuilt sort function.
+
+Examples :
+
+Input: arr[] = [7, 10, 4, 3, 20, 15], k = 3
+Output:  7
+Explanation: 3rd smallest element in the given array is 7.
+class Solution {
+    public static int kthSmallest(int[] arr, int k) {
+        // Your code here
+       for(int i=0;i<arr.length-1;i++){
+           for(int j=i+1;j<arr.length;j++){
+               if(arr[j]<arr[i]){
+                   int temp=arr[j];
+                   arr[j]=arr[i];
+                   arr[i]=temp;
+               }
+           }
+       }
+       int m=arr[k-1];
+    return m;
+    }
+       
+}
